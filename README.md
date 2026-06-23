@@ -88,7 +88,7 @@ Opens the settings for the MAUI Archive extension, allowing users to configure p
 | Setting name | Description | Default Value |
 | --- | --- | --- |
 | Build configuration | You can specify a custom build configuration when publishing your apps | 'Release' |
-| Dotnet version | You can specify a custom dotnet version like net7.0 when publishing your apps | 'net9.0' |
+| Dotnet version | You can specify a custom dotnet version like net7.0 when publishing your apps | 'net10.0' |
 | Enable Solution file format | When searching the workspace for .csproj files, this setting enabled the discovery of .sln files aswell | 'false' |
 | Android keystore directory | You can specify a custom directory path to your Android keystore files | - |
 | Android key tool path | Set a custom directory where your Android keystores are located at. Leave blank for default. | - |

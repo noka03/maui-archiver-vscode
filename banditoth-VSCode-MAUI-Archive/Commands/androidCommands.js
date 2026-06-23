@@ -65,10 +65,12 @@ async function publishAndroid() {
     let dotnetCommand = `dotnet publish "${csprojPath}" -f ${commonFeatures.getDotnetVersion()}-android${androidVersion} -c ${commonFeatures.getBuildConfiguration()} -p:AndroidPackageFormat=${packageFormat}`;
 
     if (isSigningNeeded) {
-        dotnetCommand += ` -p:AndroidKeyStore=true -p:AndroidSigningKeyStore="${keystorePath}" -p:AndroidSigningKeyAlias=${keyAlias} -p:AndroidSigningKeyPass=${keyPassword} -p:AndroidSigningStorePass=${keyPassword}`;
+        dotnetCommand += ` -p:AndroidKeyStore=true -p:AndroidSigningKeyStore="${keystorePath}" -p:AndroidSigningKeyAlias="${keyAlias}" -p:AndroidSigningKeyPass="${keyPassword}" -p:AndroidSigningStorePass="${keyPassword}"`;
     }
 
-    commonFeatures.executeCommandInTerminal(dotnetCommand);
+    const dir = path.dirname(`${csprojPath}`);
+    const openPublishFolderCommand = `open "${dir}/bin/${commonFeatures.getBuildConfiguration()}/${commonFeatures.getDotnetVersion()}-android${androidVersion}/publish"`;
+    commonFeatures.executeCommandInTerminal(`${dotnetCommand} && ${ openPublishFolderCommand }`);
 }
 
 /// <summary>

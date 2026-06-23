@@ -1,6 +1,7 @@
 const vscode = require('vscode');
 const appleFeatures = require('../Platforms/appleFeatures');
 const commonFeatures = require('../Platforms/commonFeatures');
+const path = require("path");
 
 module.exports = {
     listProvisioningProfiles: listProvisioningProfiles,
@@ -91,7 +92,9 @@ async function publishiOS() {
 
     // Removed output path for now -o "${outputPath}"
     const dotnetCommand = `dotnet publish "${csprojPath}" -f ${commonFeatures.getDotnetVersion()}-ios${iOSVersion} -c ${commonFeatures.getBuildConfiguration()} -p:ArchiveOnBuild=true -p:RuntimeIdentifier=${runtimeIdentifier}  -p:CodesignKey="${selectedSigningKey}" -p:CodesignProvision="${selectedProvisioningProfile}"`;
-    commonFeatures.executeCommandInTerminal(dotnetCommand);
+    const dir = path.dirname(`${csprojPath}`);
+    const openPublishFolderCommand = `open "${dir}/bin/${commonFeatures.getBuildConfiguration()}/${commonFeatures.getDotnetVersion()}-ios${iOSVersion}/ios-arm64/publish"`;
+    commonFeatures.executeCommandInTerminal(`${dotnetCommand} && ${openPublishFolderCommand}`);
 }
 
 
